@@ -4,6 +4,7 @@ from varasto import Varasto
 
 
 def main():
+    """Allows user to check the storage and to add and take from it"""
     mehua = Varasto(100.0)
     olutta = Varasto(100.0, 20.2)
 
