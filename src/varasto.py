@@ -1,5 +1,11 @@
+"""Tämä moduuli sisältää Varasto-luokan"""
+
 class Varasto:
-    def __init__(self, tilavuus, alku_saldo = 0):
+    """Luokka kuvaa varastoa, johon voi lisätä ja josta voi ottaa tavaraa"""
+
+    def __init__(self, tilavuus, alku_saldo=0):
+        """alustaa tilavuuden ja saldon"""
+
         if tilavuus > 0.0:
             self.tilavuus = tilavuus
         else:
@@ -18,9 +24,13 @@ class Varasto:
 
     # huom: ominaisuus voidaan myös laskea. Ei tarvita erillistä kenttää viela_tilaa tms.
     def paljonko_mahtuu(self):
+        """Palauttaa paljon on tilaa jäljellä"""
+
         return self.tilavuus - self.saldo
 
     def lisaa_varastoon(self, maara):
+        """Lisää varastoon annetun määrän tavaraa"""
+
         if maara < 0:
             return
         if maara <= self.paljonko_mahtuu():
@@ -29,6 +39,8 @@ class Varasto:
             self.saldo = self.tilavuus
 
     def ota_varastosta(self, maara):
+        """Ottaa varastosta tavaraa määrätyn määrän"""
+
         if maara < 0:
             return 0.0
         if maara > self.saldo:
@@ -42,4 +54,6 @@ class Varasto:
         return maara
 
     def __str__(self):
+        """Palauttaa saldon ja kuinka paljon on vielä tilaa"""
+
         return f"saldo = {self.saldo}, vielä tilaa {self.paljonko_mahtuu()}"
