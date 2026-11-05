@@ -1,3 +1,5 @@
+"""Main entry point for the application."""
+
 from varasto import Varasto
 
 
