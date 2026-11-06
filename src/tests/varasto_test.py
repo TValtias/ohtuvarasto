@@ -56,7 +56,9 @@ class TestVarasto(unittest.TestCase):
         self.assertAlmostEqual(self.varasto.saldo, 8)
 
     def test_liikaa_varastoon_taysi_varasto(self):
-        """Tests if adding too much to stock creates a full stock (not overfull)"""
+        """
+        Tests if adding too much to stock creates a full stock (not overfull)
+        """
 
         self.varasto.lisaa_varastoon(20)
 
