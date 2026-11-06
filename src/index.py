@@ -68,7 +68,7 @@ def kokeile_otot_liian_iso(olutta):
     print(f"Olutvarasto: {olutta}")
 
 def kokeile_otot_negatiivinen(mehua):
-    """Tries a negative take"""
+    """Tries a negative take -- adding too many characters to this to test if pylint cares..."""
 
     print(f"Mehuvarasto: {mehua}")
     print("mehua.otaVarastosta(-32.9)")
