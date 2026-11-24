@@ -54,7 +54,9 @@ def create_warehouse():
     name = request.form.get("name", "").strip()
     capacity = _quantity("capacity")
     if not name or capacity is None:
-        return _error_response("Anna varastolle nimi ja kelvollinen tilavuus.")
+        return _error_response(
+            "Please provide a name and a valid capacity for the warehouse."
+        )
 
     warehouses.append({"name": name, "stock": Varasto(capacity)})
     return redirect(url_for("index"))
@@ -67,7 +69,7 @@ def update_warehouse(warehouse_id, action):
     quantity = _quantity("quantity")
     if quantity is None:
         return _error_response(
-            "Anna kelvollinen, nollaa suurempi tai yhtä suuri määrä."
+            "Please enter a valid quantity greater than or equal to zero."
         )
     if action == "add":
         stock.lisaa_varastoon(quantity)
