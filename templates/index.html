@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Varasto</title>
+  </head>
+  <body>
+    <main>
+      <h1>Varastot</h1>
+
+      <section>
+        <h2>Luo uusi varasto</h2>
+        <form action="{{ url_for('create_warehouse') }}" method="post">
+          <label>
+            Nimi
+            <input name="name" type="text" required>
+          </label>
+          <label>
+            Tilavuus
+            <input name="capacity" type="number" min="0.01" step="any" required>
+          </label>
+          <button type="submit">Luo varasto</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Varastojen saldo</h2>
+        {% if warehouses %}
+          {% for id, item in warehouses.items() %}
+            <article>
+              <h3>{{ item.name }}</h3>
+              <p>Tilavuus: {{ item.warehouse.tilavuus }}</p>
+              <p>Saldo: {{ item.warehouse.saldo }}</p>
+
+              <form action="{{ url_for('add_to_warehouse', warehouse_id=id) }}" method="post">
+                <label>
+                  Lisättävä määrä
+                  <input name="amount" type="number" min="0.01" step="any" required>
+                </label>
+                <button type="submit">Lisää tavaraa</button>
+              </form>
+
+              <form action="{{ url_for('remove_from_warehouse', warehouse_id=id) }}" method="post">
+                <label>
+                  Otettava määrä
+                  <input name="amount" type="number" min="0.01" step="any" required>
+                </label>
+                <button type="submit">Ota tavaraa</button>
+              </form>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p>Ei vielä varastoja.</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
