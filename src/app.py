@@ -69,7 +69,6 @@ def update_warehouse(warehouse_id, action):
         return _error_response(
             "Anna kelvollinen, nollaa suurempi tai yhtä suuri määrä."
         )
-
     if action == "add":
         stock.lisaa_varastoon(quantity)
     else:
