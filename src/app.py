@@ -1,3 +1,4 @@
+# pylint: disable=global-statement
 """Flask web interface for the warehouse application."""
 
 from flask import Flask, redirect, render_template, request, url_for
@@ -11,13 +12,14 @@ except ImportError:
 app = Flask(__name__, template_folder="../templates")
 
 warehouses = {}
-state = {"next_warehouse_id": 1}
+NEXT_WAREHOUSE_ID = 1
 
 
 def reset_warehouses():
     """Clear the in-memory warehouses (used by tests)."""
+    global NEXT_WAREHOUSE_ID
     warehouses.clear()
-    state["next_warehouse_id"] = 1
+    NEXT_WAREHOUSE_ID = 1
 
 
 @app.get("/")
@@ -29,6 +31,8 @@ def index():
 @app.post("/create")
 def create_warehouse():
     """Create a warehouse from the form."""
+    global NEXT_WAREHOUSE_ID
+
     name = request.form.get("name", "").strip()
     try:
         capacity = float(request.form["capacity"])
@@ -36,8 +40,8 @@ def create_warehouse():
         return redirect(url_for("index"))
 
     if name and capacity > 0:
-        warehouse_id = state["next_warehouse_id"]
-        state["next_warehouse_id"] += 1
+        warehouse_id = NEXT_WAREHOUSE_ID
+        NEXT_WAREHOUSE_ID += 1
         warehouses[warehouse_id] = {
             "name": name,
             "warehouse": Varasto(capacity),
