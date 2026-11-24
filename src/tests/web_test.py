@@ -54,7 +54,10 @@ class TestWeb(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 400)
-        self.assertIn(b"Please provide a name and a valid capacity", response.data)
+        self.assertIn(
+            b"Please provide a name and a valid capacity",
+            response.data,
+        )
         self.assertEqual(warehouses, [])
 
     def test_invalid_quantity_is_rejected(self):
